@@ -10,7 +10,7 @@ on:
     branches: [ master ]
   workflow_dispatch:
   schedule:
-    - cron: "0 10 * * *"
+    - cron: 0 10 * * *
 
 jobs:
   build:
@@ -25,13 +25,15 @@ jobs:
         python-version: 3.7
     - name: 安装Python依赖
       run: |
-        python -m pip install --upgrade pip
-        pip install setuptools wheel twine
-    - name: 运行小米运动刷步脚本
-      env:
-        SCKEY: ${{ secrets.SCKEY }}
-        USER: ${{ secrets.USER }}
-        PWD: ${{ secrets.PWD }}
-        STEP: ${{ secrets.STEP }}
-      run: |
-        python3 Mi_Sports.py 
+        pip install requests
+        sckey='${{ secrets.SCKEY }}'
+        user='${{ secrets.USER }}'
+        pwd='${{ secrets.PWD }}'
+        step='${{ secrets.STEP }}'
+        
+        python3 Mi_Sports.py <<EOF
+        ${sckey}
+        ${user}
+        ${pwd}
+        ${step}
+        EOF
