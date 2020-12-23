@@ -208,7 +208,7 @@ def sendMsg(key, content):
 def main_handler(event, context):
     P00001 = os.environ['P1']
     P00003 = os.environ['P3']
-    skey = os.environ['SKEY']  
+    skey = os.environ['SCKEY']  
 
     # 签到
     obj = IQY(P00001, P00003)
