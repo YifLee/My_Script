@@ -1,0 +1,33 @@
+name: 爱奇艺签到抽奖
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: 0 22  * * *
+  watch:
+    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+      - uses: actions/checkout@master
+      - name: 初始化Python环境
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: 安装依赖并替换环境变量
+        run: |
+          pip install -r requirements.txt
+           
+      - name: 运行爱奇艺签到抽奖
+        run: |
+          python3 iqiyi.py
+        env:
+          SCKEY: ${{ secrets.SCKEY }}
+          P1: ${{ secrets.P1 }}
+          P3: ${{ secrets.P3 }}
