@@ -205,7 +205,8 @@ def sendMsg(key, content):
         print('server酱通知失败，异常代码：' + '\n' + str(e))
 
 
-def main_handler(event, context):
+def main():
+    import os
     P00001 = os.environ['P00001']
     P00003 = os.environ['P00003']
     skey = os.environ['SCKEY']  
@@ -234,3 +235,7 @@ def main_handler(event, context):
     msg = f"【爱奇艺等级】\n{msg_user}\n-----------------------------\n【爱奇艺签到】\n签到：{msg1}\n任务：{msg3}\n抽奖：{msg2}"
     sendMsg(skey, msg)
     return msg
+
+#入口
+if __name__ == "__main__":
+    main()
