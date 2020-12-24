@@ -1,0 +1,32 @@
+name:
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+  schedule:
+    - cron: 40 15 * * *
+  watch:
+    types: [started]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+      - uses: actions/checkout@master
+      - name: 初始化Python环境
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: 安装依赖并替换环境变量
+        env:
+          SCKEY: ${{ secrets.SCKEY}}
+          V_AUTH_REF: ${{ secrets.V_AUTH_REF}}
+          V_LOGIN_COOKIE: ${{ secrets.V_LOGIN_COOKIE}}
+          V_SIGN_COOKIE: ${{ secrets.V_SIGN_COOKIE}}
+        run: |
+          pip install -r requirements.txt
+          python3 V_video.py
