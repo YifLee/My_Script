@@ -8,7 +8,7 @@ on:
   schedule:
     - cron: 0 22  * * *
   watch:
-    types: [started]
+    types: started
 
 jobs:
   build:
