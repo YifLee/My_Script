@@ -24,9 +24,7 @@ jobs:
       - name: 安装依赖并替换环境变量
         env:
           SCKEY: ${{ secrets.SCKEY}}
-          V_AUTH_REF: ${{ secrets.V_AUTH_REF}}
-          V_LOGIN_COOKIE: ${{ secrets.V_LOGIN_COOKIE}}
-          V_SIGN_COOKIE: ${{ secrets.V_SIGN_COOKIE}}
+          V_COOKIE: ${{ secrets.V_COOKIE}}
         run: |
           pip install -r requirements.txt
           python3 V_video.py
