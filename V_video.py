@@ -1,5 +1,5 @@
 import requests
-
+import os
 
 #参考这个网站https://sc.ftqq.com/获取自己的sckey，如果cookie失效会通过server酱提示
 sckey= os.environ['SCKEY']
