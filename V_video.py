@@ -47,5 +47,3 @@ for url in urls:
     response = requests.get(url=url, headers=headers)
     print(response.content.decode("utf-8"))
     
-    if __name__ == "__main__":
-        main()
