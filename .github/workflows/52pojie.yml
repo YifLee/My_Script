@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: 吾爱破解签到
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  schedule:
+    - cron: 0 2 * * *
+  watch:
+    types: started
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    if: github.event.repository.ower.id == github.event.sender.id
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: 初始化Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      # Runs a set of commands using the runners shell
+      - name: 安装Python依赖
+        run: 
+          pip install -r requirements. txt
+
+      - name: 运行52pojie签到
+        run: | 
+          cookie='${{ secrets.COOKIE52 }}'
+          SCKEY='${{ secrets.SCKEY }}'
+          
+          python3 52pojie.py <<EOF
+          ${cookie}
+          ${SCKEY}
+          EOF
+
