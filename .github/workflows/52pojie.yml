@@ -39,7 +39,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: 安装Python依赖
         run: 
-          pip install -r requirements. txt
+          pip install -r requirements.txt
 
       - name: 运行52pojie签到
         run: | 
